@@ -10,12 +10,20 @@ module.exports = {
     ],
     themeConfig: {
       sidebar: [
-        '/day1',
+        {
+          title: 'Day 1',
+          collapsable: false,
+          children: [
+              '/vuepress',
+              '/instance'
+          ]
+        },
         {
           title: 'Day 2',
           collapsable: false,
           children: [
               '/components',
+              '/props'
           ]
         }
       ]

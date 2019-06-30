@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>VuePress | Vue.js 정복 학습 노트</title>
+    <meta name="description" content="나는 오늘 무엇을 배웠는가">
+    <link rel="icon" href="/learning-note/logo.png">
+    
+    <link rel="preload" href="/learning-note/assets/css/0.styles.12f91ebe.css" as="style"><link rel="preload" href="/learning-note/assets/js/app.ef764eaa.js" as="script"><link rel="preload" href="/learning-note/assets/js/2.3d79b871.js" as="script"><link rel="preload" href="/learning-note/assets/js/10.f067ee12.js" as="script"><link rel="prefetch" href="/learning-note/assets/js/11.b7ea0b1a.js"><link rel="prefetch" href="/learning-note/assets/js/3.ef9b9872.js"><link rel="prefetch" href="/learning-note/assets/js/4.7eb02300.js"><link rel="prefetch" href="/learning-note/assets/js/5.9acdb771.js"><link rel="prefetch" href="/learning-note/assets/js/6.d3c413bd.js"><link rel="prefetch" href="/learning-note/assets/js/7.58972847.js"><link rel="prefetch" href="/learning-note/assets/js/8.6fff8fee.js"><link rel="prefetch" href="/learning-note/assets/js/9.84edb1cb.js">
+    <link rel="stylesheet" href="/learning-note/assets/css/0.styles.12f91ebe.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/learning-note/" class="home-link router-link-active"><!----> <span class="site-name">Vue.js 정복 학습 노트</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <!----></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><!---->  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Day 1</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/learning-note/vuepress.html" class="active sidebar-link">VuePress</a></li><li><a href="/learning-note/instance.html" class="sidebar-link">Instance</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Day 2</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/learning-note/components.html" class="sidebar-link">Components</a></li><li><a href="/learning-note/props.html" class="sidebar-link">Props</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="vuepress를-사용하여-github-pages-사이트에-배포-하기-절차"><a href="#vuepress를-사용하여-github-pages-사이트에-배포-하기-절차" aria-hidden="true" class="header-anchor">#</a> VuePress를 사용하여 gitHub pages 사이트에 배포 하기 절차</h1> <ol><li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a> 계정 생성</li> <li>GitHub 리포지토리 생성</li> <li>생성한 리포지토리를 로컬PC로 클론</li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">git</span> clone <span class="token string">'생성한 리포지토리 클론 주소'</span>
+</code></pre></div><ol start="4"><li>클론된 git 디렉토리로 이동</li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">cd</span> <span class="token string">'클론해서 생성된 폴더 이름'</span>
+</code></pre></div><ol start="5"><li>프로젝트에서 <code>docs</code> 폴더 생성</li> <li>프로젝트에서 아래와 같은 명령어를 순서대로 입력</li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token function">npm</span> init -y
+<span class="token function">npm</span> <span class="token function">install</span> -D vuepress
+</code></pre></div><div class="tip custom-block"><p>TIP
+만약 permission 관련된 오류가 날 경우에는 npm install -D vuepress 대신에 sudo npm install -D vuepress 입력하세요.</p></div> <p>7.<code>package.json</code> 파일의 내용을 아래와 같이 수정</p> <div class="language-js extra-class"><pre class="language-js"><code><span class="token punctuation">{</span>
+  <span class="token operator">...</span>
+  <span class="token string">&quot;scripts&quot;</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    <span class="token string">&quot;doc&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;vuepress dev docs&quot;</span><span class="token punctuation">,</span>
+    <span class="token string">&quot;build&quot;</span><span class="token punctuation">:</span> <span class="token string">&quot;vuepress build docs&quot;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><ol start="8"><li><code>docs</code> 폴더 밑에 <code>README.md</code> 파일을 생성하고 아래의 내용을 추가</li></ol> <div class="language-js extra-class"><pre class="language-js"><code># Vue<span class="token punctuation">.</span>js 정복 캠프 학습 노트<span class="token operator">!</span><span class="token operator">!</span>
+</code></pre></div><ol start="9"><li>클론된 프로젝트 폴더 밑에 <code>deploy.sh</code> 파일을 추가하고 아래 내용 삽입</li></ol> <div class="language-bash extra-class"><pre class="language-bash"><code><span class="token comment">#!/usr/bin/env sh</span>
+
+<span class="token comment"># abort on errors</span>
+<span class="token keyword">set</span> -e
+
+<span class="token comment"># build</span>
+<span class="token function">npm</span> run build
+
+<span class="token comment"># navigate into the build output directory</span>
+<span class="token function">cd</span> docs/.vuepress/dist
+
+<span class="token comment"># if you are deploying to a custom domain</span>
+<span class="token comment"># echo 'www.example.com' &gt; CNAME</span>
+
+<span class="token function">git</span> init
+<span class="token function">git</span> <span class="token function">add</span> -A
+<span class="token function">git</span> commit -m <span class="token string">'deploy with vuepress'</span>
+
+<span class="token comment"># if you are deploying to https://&lt;USERNAME&gt;.github.io</span>
+<span class="token comment"># git push -f git@github.com:&lt;USERNAME&gt;/&lt;USERNAME&gt;.github.io.git master</span>
+
+<span class="token comment"># if you are deploying to https://&lt;USERNAME&gt;.github.io/&lt;REPO&gt;</span>
+<span class="token function">git</span> push -f <span class="token operator">&lt;</span>뷰 프레스를 위해 생성한 깃헙 리포지토리의 클론 주소<span class="token operator">&gt;</span> master:gh-pages
+
+<span class="token function">cd</span> -
+</code></pre></div><div class="warning custom-block"><p>WARNING
+위에서 &lt;VuePress를 위해 생성한 GitHub 리포지토리의 클론 주소&gt;는 꼭 리포지토리의 주소로 변경해주셔야 합니다.</p></div> <ol start="10"><li>프로젝트 폴더의 위치에서 <code>sh deploy.sh</code>를 실행하여 사이트 배포</li></ol> <div class="tip custom-block"><p>TIP
+sh라는 명령어는 윈도우 기본 명령어 프롬프트 창에서 먹지 않습니다. 따라서 cmder이라는 콘솔 프로그램을 설치해서 실행하거나 git bash와 같은 별도의 콘솔창을 사용하시면 됩니다.</p></div> <ol start="11"><li>브라우저에 <code>https://&lt;USERNAME&gt;.github.io/&lt;REPO&gt;</code> 입력 후 사이트 확인 (보통 5~10분 소요)</li></ol></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><!----> <span class="next"><a href="/learning-note/instance.html">
+          Instance
+        </a>
+        →
+      </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/learning-note/assets/js/app.ef764eaa.js" defer></script><script src="/learning-note/assets/js/2.3d79b871.js" defer></script><script src="/learning-note/assets/js/10.f067ee12.js" defer></script>
+  </body>
+</html>
