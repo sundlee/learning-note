@@ -1,5 +1,5 @@
 module.exports = {
-    title: 'Vue.js 정복 학습 노트',
+    title: 'Vue.js 정복 Camp 4기 학습 노트',
     description: '나는 오늘 무엇을 배웠는가',
     base: "/learning-note/",
     head: [
@@ -24,6 +24,24 @@ module.exports = {
           children: [
               '/components',
               '/props'
+          ]
+        },
+        {
+          title: 'Day 3',
+          collapsable: false,
+          children: [
+              '/event-emit',
+              '/axious',
+              '/lifecycle'
+          ]
+        },
+        {
+          title: 'Day 4',
+          collapsable: false,
+          children: [
+              '/template',
+              '/components-communication',
+              '/cli'
           ]
         }
       ]
