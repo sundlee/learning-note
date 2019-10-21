@@ -1,85 +1,100 @@
-## Webpack
-#### Getting-Started
-1. Install webpack global
+---
+title: webpack
+---
 
-  ```js
-  npm i webpack-cli -g
-  ```
+# webpack
 
-2. create a package json file
+## Getting-Started
 
-  ```text
-  npm init -y
-  ```
+1. webpack을 global로 설치
 
-3. create index.js & index.html
+```js
+npm i webpack-cli -g
+```
 
-  ```html
-  <!-- index.html -->
-  <html>
-    <head>
-      <title>webpack 2 demo</title>
-      <script src="https://unpkg.com/lodash@4.16.6"></script>
-    </head>
-    <body>
-      <script src="src/index.js"></script>
-    </body>
-  </html>
-  ```
+2. package.json를 생성
 
-  ```js
-  // index.js
-  function component () {
-    var element = document.createElement('div');
+```text
+npm init -y
+```
 
-    /* lodash is required for the next line to work */
-    element.innerHTML = _.join(['Hello','webpack'], ' ');
+3. index.js & index.html 를 생성
 
-    return element;
-  }
+```html
+<!-- index.html -->
+<html>
+  <head>
+    <title>webpack 2 demo</title>
+    <script src="https://unpkg.com/lodash@4.16.6"></script>
+  </head>
+  <body>
+    <script src="src/index.js"></script>
+  </body>
+</html>
+```
 
-  document.body.appendChild(component());
-  ```
+```js
+// index.js
+function component() {
+  var element = document.createElement("div");
 
-4. add the contents below into the file
+  /* lodash is required for the next line to work */
+  element.innerHTML = _.join(["Hello", "webpack"], " ");
 
-  ```js
-  // index.js
-  // import & export is ES6 that doesn't work in the browser
-  // but webpack would replace them with compatible wrapper code
-  + import _ from 'lodash';
-  ```
+  return element;
+}
 
-  ```html
-  - <script src="https://unpkg.com/lodash@4.16.6"></script>
-  - <script src="src/index.js"></script>
-  + <script src="dist/main.js"></script>
-  ```
+document.body.appendChild(component());
+```
 
-5. run this command `webpack --mode=none` and start the index.html
+4. 다음 항목들을 index.js에 추가합니다.
 
-  ```html
-  Hello webpack
-  ```
+```js
+// index.js
+// import & export is ES6 that doesn't work in the browser
+// but webpack would replace them with compatible wrapper code
++ import _ from 'lodash';
+```
 
-6. Let's add config file for more complex configuration
+```html
+<!-- 삭제 -->
+-
+<script src="https://unpkg.com/lodash@4.16.6"></script>
+<!-- 삭제 -->
+-
+<script src="src/index.js"></script>
+<!-- 추가 -->
++
+<script src="dist/main.js"></script>
+```
 
-  ```js
-  // webpack.config.js
-  // `webpack` command will pick up this config setup by default
-  var path = require('path');
+5. `webpack --mode=none`를 실행하고 index.html을 웹브라우저에서 엽니다.
 
-  module.exports = {
-    mode: 'none',
-    entry: './src/index.js',
-    output: {
-      filename: 'main.js',
-      path: path.resolve(__dirname, 'dist')
-    }
-  };
-  ```
+```html
+Hello webpack
+```
 
-#### Example 1 - CSS Code Splitting
+6. webpack.config.js에 다음 내용을 추가합니다.
+
+```js
+// webpack.config.js
+// `webpack` command will pick up this config setup by default
+var path = require("path");
+
+module.exports = {
+  mode: "none",
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+  },
+};
+```
+
+---
+
+## Example 1 - CSS Code Splitting
+
 - As for CSS files, use `css-loader`for default setting. The extra option `ExtractTextWebpackPlugin` is available for better performance
 
 ```text
@@ -89,7 +104,7 @@ npm i webpack mini-css-extract-plugin --save-dev
 
 1. Create a new `package.json`
 
-```
+```bash
 npm init -y
 ```
 
@@ -100,7 +115,7 @@ npm init -y
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>CSS & Libraries Code Splitting</title>
   </head>
   <body>
@@ -121,64 +136,69 @@ npm init -y
 
 ```css
 p {
-  color : blue;
+  color: blue;
 }
 ```
 
 5. Add `app/index.js`
 
 ```js
-import '../base.css';
+import "../base.css";
 ```
 
 6. Add `webpack.config.js`
 
 ```js
-var path = require('path');
+var path = require("path");
 
 module.exports = {
-  mode: 'none',
-  entry: './app/index.js',
+  mode: "none",
+  entry: "./app/index.js",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
   },
   module: {
-    rules: [{
-      test: /\.css$/,
-      use: ['style-loader', 'css-loader']
-    }]
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
   },
-}
+};
 ```
 
 7. Add ExtractPlugin to exract the bundled css filename
 
 ```js
 // webpack.config.js
-var path = require('path');
+var path = require("path");
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   // ...
   module: {
-    rules: [{
-      test: /\.css$/,
-      use: [
-        {
-          loader: MiniCssExtractPlugin.loader
-        },
-        "css-loader"
-      ]
-    }]
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          "css-loader",
+        ],
+      },
+    ],
   },
-  plugins: [
-    new MiniCssExtractPlugin()
-  ],
-}
+  plugins: [new MiniCssExtractPlugin()],
+};
 ```
 
-#### Example 2 - Libraries Code Splitting
+---
+
+## Example 2 - Libraries Code Splitting
+
 - When using a couple of libraries, should you import them at the very beginning of bundling all files to avoid repetitively use them in every build.
 
 ```text
@@ -187,20 +207,20 @@ npm install moment lodash --save
 npm i webpack-manifest-plugin --save-dev
 ```
 
-1. Create a new `package.json`
+1. `package.json`를 생성합니다.
 
 ```
 npm init -y
 ```
 
-2. Install the necessary loaders and plugins using the commands above
-3. Add `index.html`
+2. 위의 명령어를 참조하여 필요한 loaders와 plugins을 설치합니다.
+3. `index.html`를 추가합니다.
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Libraries Code Splitting</title>
   </head>
   <body>
@@ -223,12 +243,12 @@ npm init -y
 </html>
 ```
 
-4. Add `app/index.js`
+4. `app/index.js`를 추가합니다.
 
 ```js
-var moment = require('moment');
-var _ = require('lodash');
-var ele = document.querySelectorAll('p');
+var moment = require("moment");
+var _ = require("lodash");
+var ele = document.querySelectorAll("p");
 
 document.addEventListener("DOMContentLoaded", function(event) {
   ele[0].innerText = moment().format();
@@ -236,29 +256,26 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 ```
 
-5. Add `webpack.config.js`
+5. `webpack.config.js`를 추가합니다.
 
 ```js
-var webpack = require('webpack');
-var path = require('path');
+var webpack = require("webpack");
+var path = require("path");
 
 module.exports = {
-  mode: 'none',
+  mode: "none",
   entry: {
-    main: './app/index.js',
-    vendor: [
-      'moment',
-      'lodash'
-    ]
+    main: "./app/index.js",
+    vendor: ["moment", "lodash"],
   },
   output: {
-    filename: '[name].js',
-    path: path.resolve(__dirname, 'dist')
-  }
-}
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist"),
+  },
+};
 ```
 
-6. Add the code below
+6.아래 내용을 webpack.config.js에 추가합니다.
 
 ```js
 // 1
@@ -278,7 +295,10 @@ optimization: {
 }
 ```
 
-#### Example 3 - Webpack Dev Server Setting
+---
+
+## Example 3 - Webpack Dev Server Setting
+
 - Initial development setting to make the build process easier
 
 ```
@@ -315,27 +335,27 @@ webpack-dev-server --open
 3. Add `app/index.js`
 
 ```js
-var ele = document.getElementsByClassName('container')[0]
+var ele = document.getElementsByClassName("container")[0];
 ele.innerText = "Webpack loaded!!";
 ```
 
 4. Add `webpack.config.js`
 
 ```js
-var path = require('path');
+var path = require("path");
 
 module.exports = {
-  mode: 'none',
-  entry: './app/index.js',
+  mode: "none",
+  entry: "./app/index.js",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: 'dist'
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "dist",
   },
   devtool: "cheap-eval-source-map",
   devServer: {
     publicPath: "/dist/",
-    port: 9000
+    port: 9000,
   },
 };
 ```
@@ -344,7 +364,10 @@ module.exports = {
 
 > Please keep in mind that the **webpack devserver compiles in memory** not emits bundled file in output.path
 
-#### Example 4 - Webpack Dev Middleware
+---
+
+## Example 4 - Webpack Dev Middleware
+
 - Have a full control over already installed Node.js by installing the commands below
 
 ```
@@ -372,20 +395,20 @@ npm install express webpack-dev-middleware --save-dev
 3. Create a new `server.js` file and add Express & EJS in it
 
 ```js
-var express = require('express');
+var express = require("express");
 var app = express();
-var path = require('path');
+var path = require("path");
 
 app.use(express.static(__dirname));
 
 // view engine setup
 // __dirname : root folder
-app.set('views', path.join(__dirname));
-app.set('view engine', 'ejs');
-app.engine('html', require('ejs').renderFile);
+app.set("views", path.join(__dirname));
+app.set("view engine", "ejs");
+app.engine("html", require("ejs").renderFile);
 
-app.get('/', function (req, res) {
-  res.send('index');
+app.get("/", function(req, res) {
+  res.send("index");
 });
 
 app.listen(3000);
@@ -396,22 +419,22 @@ console.log("Server running on port 3000");
 5. Add `app/index.js`
 
 ```js
-var ele = document.getElementsByClassName('container')[0]
+var ele = document.getElementsByClassName("container")[0];
 ele.innerText = "Webpack loaded!!";
 ```
 
 6. Add `webpack.config.js`
 
 ```js
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
+var webpack = require("webpack");
 
 module.exports = {
-  entry: './app/index.js',
+  entry: "./app/index.js",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: 'http://localhost:3000/dist'
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "http://localhost:3000/dist",
   },
 };
 ```
@@ -426,13 +449,18 @@ var compiler = webpack(webpackConfig);
 ```
 
 ```js
-app.use(webpackDevMiddleware(compiler, {
-  publicPath: webpackConfig.output.publicPath,
-  stats: {colors: true}
-}));
+app.use(
+  webpackDevMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath,
+    stats: { colors: true },
+  }),
+);
 ```
 
-#### Example 5 - Webpack Plugins
+---
+
+## Example 5 - Webpack Plugins
+
 - Besides loader, plugins offer a wide variety of different features that Loaders don't provide
 
 1. Create a new `package.json` and install plugins below
@@ -457,23 +485,23 @@ npm init -y && npm install webpack jquery --save-dev
 3. Add `app/index.js`
 
 ```js
-var $ = require('jquery');
+var $ = require("jquery");
 console.log("loaded jQuery version is " + $.fn.jquery);
 ```
 
 4. Add `webpack.config.js`
 
 ```js
-var path = require('path');
-var webpack = require('webpack');
+var path = require("path");
+var webpack = require("webpack");
 
 module.exports = {
-  mode: 'none',
-  entry: './app/index.js',
+  mode: "none",
+  entry: "./app/index.js",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist')
-  }
+    filename: "bundle.js",
+    path: path.resolve(__dirname, "dist"),
+  },
 };
 ```
 
@@ -487,10 +515,10 @@ module.exports = {
   },
   plugins: [
     new webpack.ProvidePlugin({
-      $: 'jquery'
-    })
-  ]
-}
+      $: "jquery",
+    }),
+  ],
+};
 ```
 
 7. comment out the first line that loads jquery library in `app/index.js`
